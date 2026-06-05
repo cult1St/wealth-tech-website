@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Wealth Tech logo</title>
+  <desc id="desc">A navy rounded square with a green gold Wealth Tech monogram.</desc>
+  <defs>
+    <linearGradient id="bg" x1="76" y1="44" x2="436" y2="468" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0B1F4D"/>
+      <stop offset="1" stop-color="#06142F"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="132" y1="126" x2="380" y2="386" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00C97F"/>
+      <stop offset="0.58" stop-color="#00A86B"/>
+      <stop offset="1" stop-color="#F4B400"/>
+    </linearGradient>
+    <filter id="shadow" x="68" y="74" width="376" height="384" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#031026" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <circle cx="402" cy="104" r="44" fill="#F4B400" opacity="0.95"/>
+  <circle cx="104" cy="410" r="54" fill="#00A86B" opacity="0.18"/>
+  <g filter="url(#shadow)">
+    <path d="M119 148h56l34 162 44-162h47l45 162 34-162h55l-59 236h-58l-41-148-41 148h-58L119 148Z" fill="url(#mark)"/>
+    <path d="M183 148h146v48h-49v188h-50V196h-47v-48Z" fill="#FFFFFF" opacity="0.96"/>
+  </g>
+</svg>

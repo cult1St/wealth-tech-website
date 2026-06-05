@@ -97,7 +97,7 @@ export default function Faq() {
       </header>
       <section className="section bg-light">
         <div className="container">
-          <div className="faq-list">
+          <div className="faq-list faq-list-panel">
             {faqs.map((faq, index) => {
               const isOpen = openIndex === index;
               const answerId = `faq-answer-${index}`;
@@ -113,11 +113,18 @@ export default function Faq() {
                   >
                     <span>{faq.question}</span>
                     <span className="faq-icon">
-                      <i className="fa-solid fa-plus" aria-hidden="true" />
+                      <i className="fa-solid fa-chevron-down" aria-hidden="true" />
                     </span>
                   </button>
-                  <div className="faq-answer" id={answerId}>
-                    <p>{faq.answer}</p>
+                  <div
+                    className="faq-answer"
+                    id={answerId}
+                    role="region"
+                    aria-hidden={!isOpen}
+                  >
+                    <div className="faq-answer-inner">
+                      <p>{faq.answer}</p>
+                    </div>
                   </div>
                 </div>
               );

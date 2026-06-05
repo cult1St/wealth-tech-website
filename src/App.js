@@ -38,18 +38,91 @@ const legalLinks = [
   { label: 'Refund Policy', path: '/refund-policy' },
 ];
 
-const routeTitles = {
-  '/': 'Home',
-  '/about': 'About Us',
-  '/services': 'Services',
-  '/vtu': 'VTU Platform',
-  '/security': 'Security',
-  '/faq': 'FAQ',
-  '/contact': 'Contact',
-  '/privacy-policy': 'Privacy Policy',
-  '/terms': 'Terms',
-  '/refund-policy': 'Refund Policy',
+const siteUrl = 'https://wealthtech.ng';
+
+const routeMeta = {
+  '/': {
+    title: "Wealth Tech - Nigeria's Leading Fintech and Payment Solutions Company",
+    description:
+      'Wealth Tech provides secure digital payments, VTU services, wallet systems, e-commerce development, and custom software solutions for businesses across Nigeria.',
+    keywords:
+      'Wealth Tech, fintech Nigeria, digital payments Nigeria, VTU services, wallet funding, payment gateway, airtime purchase, data subscription',
+  },
+  '/about': {
+    title: 'About Wealth Tech - Digital Finance and Software Company in Nigeria',
+    description:
+      'Learn about Wealth Tech, a Nigerian technology company building secure payment, VTU, wallet, e-commerce, and business automation solutions.',
+    keywords: 'about Wealth Tech, Nigerian fintech company, payment technology Nigeria, software company Lagos',
+  },
+  '/services': {
+    title: 'Wealth Tech Services - Fintech, VTU, Payments and Custom Software',
+    description:
+      'Explore Wealth Tech services including payment processing, VTU platforms, wallet systems, e-commerce development, automation, and custom software.',
+    keywords: 'fintech services Nigeria, payment processing, VTU platform, e-commerce development, business automation',
+  },
+  '/vtu': {
+    title: 'VTU Services Nigeria - Airtime, Data, Electricity and Cable Payments',
+    description:
+      'Use Wealth Tech for reliable VTU services including airtime purchase, data subscriptions, electricity payments, cable TV renewals, and wallet funding.',
+    keywords: 'VTU services Nigeria, buy airtime, data subscription, electricity payment, cable TV payment, wallet funding',
+  },
+  '/security': {
+    title: 'Wealth Tech Security - Secure Digital Transactions and Data Protection',
+    description:
+      'Review Wealth Tech security practices for encrypted payment workflows, data protection, transaction monitoring, and fraud prevention.',
+    keywords: 'payment security Nigeria, fintech security, data protection, secure wallet, transaction monitoring',
+  },
+  '/faq': {
+    title: 'Wealth Tech FAQ - Wallet Funding, Refunds and Transaction Support',
+    description:
+      'Find answers about Wealth Tech wallet funding, failed transactions, refund reviews, VTU purchases, account security, and payment verification.',
+    keywords: 'Wealth Tech FAQ, wallet funding help, failed transaction refund, VTU support, payment verification',
+  },
+  '/contact': {
+    title: 'Contact Wealth Tech - Payment, VTU and Software Support',
+    description:
+      'Contact Wealth Tech for fintech platforms, VTU services, payment integration, custom software, e-commerce development, and transaction support.',
+    keywords: 'contact Wealth Tech, fintech support Nigeria, VTU support, payment integration Lagos, software development contact',
+  },
+  '/privacy-policy': {
+    title: 'Wealth Tech Privacy Policy',
+    description:
+      'Read the Wealth Tech Privacy Policy covering data collection, usage, cookies, security, third-party services, and user rights.',
+    keywords: 'Wealth Tech privacy policy, data protection Nigeria, fintech privacy, NDPR',
+  },
+  '/terms': {
+    title: 'Wealth Tech Terms and Conditions',
+    description:
+      'Review Wealth Tech terms for service usage, user responsibilities, account management, transaction processing, and dispute resolution.',
+    keywords: 'Wealth Tech terms, fintech terms Nigeria, VTU terms, payment service terms',
+  },
+  '/refund-policy': {
+    title: 'Wealth Tech Refund Policy',
+    description:
+      'Read the Wealth Tech refund policy for wallet funding, VTU purchases, failed transactions, utility payments, and refund review timelines.',
+    keywords: 'Wealth Tech refund policy, failed transaction refund, VTU refund, wallet reversal, payment dispute',
+  },
 };
+
+function setMeta(selector, attribute, value) {
+  let element = document.querySelector(selector);
+
+  if (!element) {
+    element = document.createElement(selector.startsWith('link') ? 'link' : 'meta');
+    if (selector.includes('name="')) {
+      element.setAttribute('name', selector.match(/name="([^"]+)"/)[1]);
+    }
+    if (selector.includes('property="')) {
+      element.setAttribute('property', selector.match(/property="([^"]+)"/)[1]);
+    }
+    if (selector.startsWith('link')) {
+      element.setAttribute('rel', selector.match(/rel="([^"]+)"/)[1]);
+    }
+    document.head.appendChild(element);
+  }
+
+  element.setAttribute(attribute, value);
+}
 
 function Preloader() {
   const [isHidden, setIsHidden] = useState(false);
@@ -266,7 +339,18 @@ function usePageEnhancements() {
   const location = useLocation();
 
   useEffect(() => {
-    document.title = `Wealth Tech | ${routeTitles[location.pathname] || 'Page'}`;
+    const meta = routeMeta[location.pathname] || routeMeta['/'];
+    const canonical = `${siteUrl}${location.pathname === '/' ? '/' : location.pathname}`;
+
+    document.title = meta.title;
+    setMeta('meta[name="description"]', 'content', meta.description);
+    setMeta('meta[name="keywords"]', 'content', meta.keywords);
+    setMeta('meta[property="og:title"]', 'content', meta.title);
+    setMeta('meta[property="og:description"]', 'content', meta.description);
+    setMeta('meta[property="og:url"]', 'content', canonical);
+    setMeta('meta[name="twitter:title"]', 'content', meta.title);
+    setMeta('meta[name="twitter:description"]', 'content', meta.description);
+    setMeta('link[rel="canonical"]', 'href', canonical);
   }, [location.pathname]);
 
   useEffect(() => {
