@@ -340,15 +340,6 @@ function Layout() {
   }, []);
 
   function handleClick(event) {
-    const faqButton = event.target.closest('.faq-question');
-    if (faqButton) {
-      const item = faqButton.closest('.faq-item');
-      const wasOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach((faq) => faq.classList.remove('open'));
-      if (!wasOpen) item.classList.add('open');
-      return;
-    }
-
     const tabButton = event.target.closest('[data-tab]');
     if (tabButton) {
       const tab = tabButton.dataset.tab;
